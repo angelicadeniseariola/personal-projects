@@ -54,7 +54,6 @@ button { font-family: inherit; cursor: pointer; }
   padding-right: max(18px, env(safe-area-inset-right, 0px));
 }
 
-/* Tabs */
 body::before {
   content: "";
   position: fixed;
@@ -97,7 +96,6 @@ main { flex: 1 0 auto; display: flex; flex-direction: column; }
 .primary-btn.ghost:hover { background: var(--dark-pink); color: white; }
 .next { margin-top: 44px; }
 
-/* Falling petals */
 .petal {
   position: fixed;
   top: -30px;
@@ -110,7 +108,6 @@ main { flex: 1 0 auto; display: flex; flex-direction: column; }
   to { transform: translate(var(--dx, 0), 110vh) rotate(650deg); opacity: 0; }
 }
 
-/* Hero */
 .hero {
   display: flex;
   align-items: center;
@@ -195,7 +192,6 @@ main { flex: 1 0 auto; display: flex; flex-direction: column; }
 }
 .primary-btn:hover { background: transparent; color: var(--dark-pink); transform: translateY(-3px); }
 
-/* Language and music */
 .music-btn {
   position: fixed;
   z-index: 20;
@@ -210,7 +206,31 @@ main { flex: 1 0 auto; display: flex; flex-direction: column; }
   font-size: 12px;
 }
 
-/* Sections */
+.back-btn {
+  position: fixed;
+  z-index: 20;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  left: calc(18px + env(safe-area-inset-left, 0px));
+  background: white;
+  border: 1px solid #e8bdca;
+  color: var(--dark-pink);
+  border-radius: 30px;
+  padding: 12px 18px;
+  box-shadow: 0 6px 22px var(--shadow);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.arrive {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #fff;
+  pointer-events: none;
+  animation: arrive .9s .1s ease-out forwards;
+}
+@keyframes arrive { to { opacity: 0; visibility: hidden; } }
+
 section { padding-block: clamp(64px, 11vw, 100px); text-align: center; }
 
 .section-label {
@@ -231,7 +251,6 @@ section { padding-block: clamp(64px, 11vw, 100px); text-align: center; }
 }
 .section-text { max-width: 620px; margin: auto; font-size: 14px; line-height: 2.1; }
 
-/* Letter */
 .letter-section { background: var(--light-pink); }
 
 .envelope-wrap { margin: 42px auto 0; max-width: 760px; }
@@ -297,7 +316,6 @@ section { padding-block: clamp(64px, 11vw, 100px); text-align: center; }
   transition: opacity .7s, transform .7s;
 }
 
-/* Gallery */
 .gallery { background: var(--cream); }
 
 .gallery { position: relative; overflow: hidden; }
@@ -388,14 +406,12 @@ section { padding-block: clamp(64px, 11vw, 100px); text-align: center; }
 .lb-prev { left: max(10px, env(safe-area-inset-left, 0px)); }
 .lb-next { right: max(10px, env(safe-area-inset-right, 0px)); }
 
-/* Cake */
 .cake-section { background: var(--light-pink); }
 .cake { font-size: 104px; line-height: 1.2; margin: 24px auto 8px; animation: bounce 2.2s infinite ease-in-out; display: inline-block; filter: drop-shadow(0 14px 18px var(--shadow)); }
 @keyframes bounce { 50% { transform: translateY(-12px); } }
 .cake-message { font-family: var(--serif); font-style: italic; color: var(--dark-pink); font-size: 19px; margin-bottom: 26px; }
 .wish-message { margin: 24px auto 0; min-height: 3.5em; max-width: 440px; font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--dark-pink); }
 
-/* Final */
 .final-section { background: var(--blush); padding-block: clamp(72px, 12vw, 110px); }
 .final-section .big { font-size: 36px; margin-bottom: 6px; }
 .final-section h2 { font-family: var(--script); font-size: clamp(54px, 10.5vw, 90px); color: var(--dark-pink); font-weight: 400; line-height: 1.15; text-wrap: balance; }
@@ -427,6 +443,8 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
 
 <body>
 
+<div class="arrive" id="arrive" hidden></div>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="flower" viewBox="-60 -60 120 120">
     <g fill="currentColor">
@@ -440,12 +458,11 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   </symbol>
 </svg>
 
-<!-- BACKGROUND MUSIC: put your song in this folder as music.mp3.
-     If the file is missing, a soft music-box "Happy Birthday" plays instead. -->
 <audio id="bgMusic" loop preload="none">
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="assets/music1.mp3" type="audio/mpeg">
 </audio>
 
+<a class="back-btn" href="../index.html">← My Little Universe</a>
 <button class="music-btn" id="musicBtn" type="button" aria-pressed="false"></button>
 
 <nav class="tabs" aria-label="Pages">
@@ -459,7 +476,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
 
 <main id="main">
 
-<!-- HERO -->
 <header class="hero panel grow" data-tab="home">
   <div class="in">
     <div class="flower" style="--d:0">🌸</div>
@@ -471,7 +487,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   </div>
 </header>
 
-<!-- LETTER -->
 <section class="letter-section panel grow" data-tab="letter" hidden>
   <div class="in">
     <div class="section-label" data-i="letterLabel"></div>
@@ -506,7 +521,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   </div>
 </section>
 
-<!-- PHOTO GALLERY: photos named 1, 2, 3 ... in a folder next to this file are found automatically -->
 <section class="gallery panel grow" data-tab="photos" hidden>
   <div class="deco d1" aria-hidden="true"><svg viewBox="-60 -60 120 120"><use href="#flower"/></svg></div>
   <div class="deco d2" aria-hidden="true"><svg viewBox="-60 -60 120 120"><use href="#flower"/></svg></div>
@@ -529,7 +543,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">&rarr;</button>
 </div>
 
-<!-- CAKE -->
 <section class="cake-section panel" data-tab="wish" hidden>
   <div class="in">
     <div class="section-label" data-i="wishLabel"></div>
@@ -545,7 +558,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   </div>
 </section>
 
-<!-- FINAL MESSAGE -->
 <section class="final-section panel grow" data-tab="wish" hidden>
   <div class="in">
     <div class="big">🌷 🤍 🌸</div>
@@ -618,7 +630,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
     musicBtn.textContent = playing ? d.pause : d.play;
   }
 
-  // Letter
   var kids = letterBox.querySelectorAll(".letter > *");
   for (var k = 0; k < kids.length; k++) kids[k].style.setProperty("--n", k);
 
@@ -635,7 +646,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
     }
   });
 
-  // Photos: files named 1, 2, 3 ... in a folder next to index.html
   var PHOTO_COUNT = 12;
   var FOLDERS = ["", "photos/", "Photos/", "pictures/", "Pictures/", "images/", "Images/", "img/", "pics/", "photo/", "picture/", "assets/"];
   var EXTS = ["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG", "WEBP"];
@@ -681,7 +691,7 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   (async function () {
     var base = null;
     for (var num = 1; num <= PHOTO_COUNT && !base; num++) base = await find(num, FOLDERS, EXTS);
-    if (!base) return; // no photos found: the flower frames stay
+    if (!base) return;
     var order = [base.ext].concat(EXTS.filter(function (e) { return e !== base.ext; }));
     await Promise.all(shots.map(async function (fig, i) {
       var r = (i + 1 === base.n) ? base : await find(i + 1, [base.folder], order);
@@ -719,7 +729,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
     if (e.key === "ArrowRight") openPhoto(lbIndex + 1);
   });
 
-  // Petals
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var EMOJI = ["🌸", "🌷", "♡", "🌺"];
   function petal() {
@@ -736,14 +745,12 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   function burst(n) { if (reduce) return; for (var i = 0; i < n; i++) setTimeout(petal, i * 80); }
   if (!reduce) setInterval(function () { if (!document.hidden) petal(); }, 1600);
 
-  // Wish
   wishBtn.addEventListener("click", function () {
     wished = true;
     wishMessage.textContent = T[lang].wishDone;
     burst(30);
   });
 
-  // Music: plays music.mp3 if it exists, otherwise a soft music-box "Happy Birthday"
   var BEAT = 0.55;
   var SONG = [
     [392,.75],[392,.25],[440,1],[392,1],[523.25,1],[493.88,2],
@@ -805,7 +812,6 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
     }
   });
 
-  // Tabs
   var TABS = ["home", "letter", "photos", "wish"];
   var panels = document.querySelectorAll("[data-tab]");
   var tabBtns = document.querySelectorAll(".tab");
@@ -834,6 +840,15 @@ footer { background: var(--dark-pink); color: white; text-align: center; padding
   window.addEventListener("hashchange", function () { show(location.hash.replace("#", "")); });
   show(location.hash.replace("#", "") || "home");
   current = current || "home";
+
+  try {
+    var ref = document.referrer && new URL(document.referrer);
+    if (ref && ref.origin === location.origin && ref.pathname.indexOf("birthday-for-mame") < 0) {
+      var ar = $("arrive");
+      ar.hidden = false;
+      setTimeout(function () { ar.remove(); }, 1200);
+    }
+  } catch (e) {}
 
   applyLang();
 })();
